@@ -38,6 +38,8 @@ spec:
             {{- end }}
             - name: MONGODB_HOST
               value: {{ template "errbit-helm.mongodbHost" . }}
+            - name: MONGODB_URL
+              value: {{ template "errbit-helm.mongodbURL" . }}
             - name: MONGODB_PORT
               value: {{ template "errbit-helm.mongodbPort" . }}
             - name: MONGODB_DATABASE

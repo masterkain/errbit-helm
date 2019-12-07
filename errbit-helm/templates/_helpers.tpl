@@ -70,3 +70,7 @@ Otherwise it will return the set value
 {{- required "Value mongodbDatabase must be set" .Values.mongodbDatabase -}}
 {{- end -}}
 {{- end -}}
+
+{{- define "errbit-helm.mongodbURL" -}}
+{{- printf "mongodb://%s-%s:%s" .Release.Name "mongodb" .Values.mongodbPort -}}
+{{- end -}}

@@ -65,7 +65,7 @@ spec:
               cpu: "50m"
           readinessProbe:
             httpGet:
-              path: /health/readiness
+              path: /robots.txt
               port: {{ .Values.service.internalPort }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}

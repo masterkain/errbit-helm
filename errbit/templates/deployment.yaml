@@ -1,5 +1,5 @@
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: ReplicationController
 metadata:
   name: {{ template "errbit-helm.fullname" . }}
   labels:
@@ -9,6 +9,8 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  selector:
+    app: {{ template "errbit-helm.name" . }}
   template:
     metadata:
       labels:
@@ -54,6 +56,13 @@ spec:
             successThreshold: 1
             timeoutSeconds: 60
             failureThreshold: 6
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "25m"
+            limits:
+              memory: "512Mi"
+              cpu: "50m"
           readinessProbe:
             httpGet:
               path: /health/readiness

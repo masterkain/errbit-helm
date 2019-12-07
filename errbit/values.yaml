@@ -4,7 +4,7 @@
 revisionHistoryLimit: 2
 replicaCount: 1
 image:
-  repository: tmaier/errbit-helm
+  repository: errbit/errbit
   tag: latest
   pullPolicy: Always
 service:
@@ -72,7 +72,7 @@ config:
   ERRBIT_PROTOCOL: http
   ERRBIT_USE_GRAVATAR: "true"
   PORT: '8080'
-  RACK_ENV: deployment
+  RACK_ENV: production
   RAILS_ENV: production
 configSecure:
   ERRBIT_ADMIN_PASSWORD: password

@@ -3,22 +3,25 @@
 # Declare variables to be passed into your templates.
 revisionHistoryLimit: 2
 replicaCount: 1
+
 image:
   repository: errbit/errbit
   tag: latest
   pullPolicy: Always
+
 service:
   name: http
   type: ClusterIP
   externalPort: 80
   internalPort: 8080
+
 ingress:
   enabled: false
   path: '/*'
   # Used to create an Ingress record.
   hosts:
     - errbit.example.local
-  annotations:
+  annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   tls:
@@ -26,6 +29,7 @@ ingress:
     # - secretName: errbit-example-tls
     #   hosts:
     #     - errbit.example.local
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -37,6 +41,7 @@ resources: {}
   # requests:
   #  cpu: 20m
   #  memory: 50Mi
+
 batch:
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -49,15 +54,6 @@ batch:
     # requests:
     #  cpu: 50m
     #  memory: 512Mi
-
-## Configure access to an external database
-## For these settings to be used you need to disable
-## the included postgresql database below
-# mongodbHost:
-# mongodbPort: 27017
-# mongodbPassword:
-# mongodbUsername:
-# mongodbDatabase: errbit
 
 ## Configure Errbit
 ## See https://github.com/errbit/errbit/blob/master/docs/configuration.md for the available environment variables
@@ -78,14 +74,6 @@ configSecure:
   ERRBIT_ADMIN_PASSWORD: password
   SECRET_KEY_BASE: "please change me"
 
-## Sets whether the database shall be setup when
-## the helm chart gets installed
-bootstrapErrbit: true
-
-networkPolicy:
-  ## Enable creation of NetworkPolicy resources.
-  ##
-  enabled: false
 ## Configuration values for the mongodb dependency.
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/mongodb/README.md
 ##
@@ -96,4 +84,4 @@ mongodb:
   mongodbDatabase: errbit
   persistence:
     ## Consider to reduce the allocated disk space to fit the need
-    # size: 8Gi
+    size: 8Gi

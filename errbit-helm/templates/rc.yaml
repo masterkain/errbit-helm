@@ -27,23 +27,8 @@ spec:
           ports:
             - containerPort: {{ .Values.service.internalPort }}
           env:
-            - name: MONGODB_USERNAME
-              value: {{ template "errbit-helm.mongodbUsername" . }}
-            {{- if .Values.mongodb.enabled }}
-            - name: MONGODB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mongodb.fullname" . }}
-                  key: mongodb-password
-            {{- end }}
-            - name: MONGODB_HOST
-              value: {{ template "errbit-helm.mongodbHost" . }}
             - name: MONGODB_URL
               value: {{ template "errbit-helm.mongodbURL" . }}
-            - name: MONGODB_PORT
-              value: {{ template "errbit-helm.mongodbPort" . }}
-            - name: MONGODB_DATABASE
-              value: {{ template "errbit-helm.mongodbDatabase" . }}
           envFrom:
             - secretRef:
                 name: {{ template "errbit-helm.fullname" . }}
